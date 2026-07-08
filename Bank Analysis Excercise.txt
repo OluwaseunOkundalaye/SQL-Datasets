@@ -1,0 +1,95 @@
+--EXERCISE
+--STEP ONE:
+--CREATE THE FOLLOWING TABLES BY EXECUTING THE QUERIES BELOW
+
+--CUSTOMER TABLE
+CREATE TABLE CUSTOMER(
+custNo VARCHAR(10) NOT NULL,
+custName VARCHAR(50),
+street VARCHAR (50),
+suburb VARCHAR (50),
+postCode VARCHAR(4),
+telephone VARCHAR(10))
+
+--BANK BRANCH TABLE
+CREATE TABLE BRANCH (
+branchNo INT NOT NULL,
+branchName VARCHAR (20) NOT NULL,
+postCode VARCHAR (4) NOT NULL)
+
+--ACCOUNT TABLE
+CREATE TABLE ACCOUNT (
+accNo VARCHAR(10),
+branchNo INT NOT NULL,
+custNo VARCHAR(10) NOT NULL,
+balance FLOAT)
+
+--LOAN TABLE
+CREATE TABLE LOAN (
+LoanNo VARCHAR(10),
+branchNo INT NOT NULL,
+custNo VARCHAR(10),
+amount FLOAT,
+IntRate FLOAT,
+dateloaned DATE,
+dueDate DATE,
+datePaidoff DATE)
+
+--STEP TWO:
+--LOAD DATA INTO EACH TABLES BY EXECUTING THE FOLLOWING QUERIES
+
+-- Insert into CUSTOMER table
+INSERT INTO CUSTOMER (custNo, custName, street, suburb, postCode, telephone) VALUES
+('CUST001', 'John Doe', '123 Main St', 'Central', '1001', '0801234567'),
+('CUST002', 'Jane Smith', '456 Elm St', 'Northside', '1002', '0802234567'),
+('CUST003', 'Michael Johnson', '789 Oak St', 'Westend', '1003', '0803234567'),
+('CUST004', 'Emily Davis', '321 Pine St', 'Eastside', '1004', '0804234567'),
+('CUST005', 'Daniel Brown', '654 Cedar St', 'Southside', '1005', '0805234567'),
+('CUST006', 'Sarah Wilson', '987 Birch St', 'Central', '1001', '0806234567'),
+('CUST007', 'David White', '135 Maple St', 'Northside', '1002', '0807234567'),
+('CUST008', 'Emma Harris', '246 Ash St', 'Westend', '1003', '0808234567'),
+('CUST009', 'James Anderson', '579 Spruce St', 'Eastside', '1004', '0809234567');
+
+-- Insert into BRANCH table
+INSERT INTO BRANCH (branchNo, branchName, postCode) VALUES
+(1, 'Central Branch', '1001'),
+(2, 'North Branch', '1002'),
+(3, 'West Branch', '1003'),
+(4, 'East Branch', '1004'),
+(5, 'South Branch', '1005');
+
+-- Insert into ACCOUNT table
+INSERT INTO ACCOUNT (accNo, branchNo, custNo, balance) VALUES
+('ACC001', 1, 'CUST001', 1500.75),
+('ACC002', 2, 'CUST002', 2300.50),
+('ACC003', 3, 'CUST003', 450.00),
+('ACC004', 4, 'CUST004', 789.20),
+('ACC005', 5, 'CUST005', 1025.60),
+('ACC006', 1, 'CUST006', 2000.00),
+('ACC007', 2, 'CUST007', 3350.40),
+('ACC008', 3, 'CUST008', 1250.80),
+('ACC009', 4, 'CUST009', 560.30);
+
+-- Insert into LOAN table
+INSERT INTO LOAN (LoanNo, branchNo, custNo, amount, IntRate, dateloaned, dueDate, datePaidoff) VALUES
+('LOAN001', 1, 'CUST001', 5000.00, 5.0, '2024-01-15', '2025-01-15', NULL),
+('LOAN002', 2, 'CUST002', 10000.00, 4.5, '2023-07-10', '2024-07-10', '2024-06-25'),
+('LOAN003', 3, 'CUST003', 7500.50, 6.0, '2023-09-20', '2024-09-20', NULL),
+('LOAN004', 4, 'CUST004', 6200.00, 5.2, '2023-11-05', '2024-11-05', NULL),
+('LOAN005', 5, 'CUST005', 4000.25, 4.8, '2024-03-01', '2025-03-01', NULL),
+('LOAN006', 1, 'CUST006', 8500.75, 5.5, '2023-12-15', '2024-12-15', '2024-12-01'),
+('LOAN007', 2, 'CUST007', 9200.60, 6.3, '2024-02-20', '2025-02-20', NULL),
+('LOAN008', 3, 'CUST008', 3000.00, 4.0, '2023-06-25', '2024-06-25', '2024-06-20');
+
+--STEP THREE
+--ESTABLISH RELATIONSHIP BETWEEN ALL TABLES
+
+--PROVIDE ANSWERS TO THE FOLLOWING QUESTIONS
+--1. Print the total number of customers who had previously or are having accounts in branch 1. 
+	--Note that customer can have many accounts in a Branch.
+--2. For customers who have a total balance of over 2000 In all his/her accounts, 
+	--print the customer number (CustNo) and customer name.
+--3. Print the name of customer who has taken a loan or more, number of loanns and the sum of interest 
+	--amount paid per month for each of their loan(s).
+--Hint: Each customer could have zero of more Loans, and interest amount pad per month for each 
+	--loan is calculated as (amount*IntRate /12 /100).
